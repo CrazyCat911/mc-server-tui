@@ -14,11 +14,11 @@ class Sidebar(Vertical):
     current_menu = reactive("view-info")
 
     def compose(self) -> ComposeResult:
-        yield Button("info", id="btn-info")
-        yield Button("setup", id="btn-setup")
-        yield Button("mods", id="btn-mods")
-        yield Button("console", id="btn-console")
-        yield Button("settings", id="btn-settings")
+        yield Button("Info", id="btn-info")
+        yield Button("Setup", id="btn-setup")
+        yield Button("Mods", id="btn-mods")
+        yield Button("Console", id="btn-console")
+        yield Button("Settings", id="btn-settings")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         event.stop()
@@ -62,11 +62,11 @@ class MCServerTui(App):
         with Horizontal():
             yield Sidebar()
             with ContentSwitcher(initial="view-info", id="main"):
-                yield Placeholder("info", id="view-info")
-                yield Placeholder("setup", id="view-setup")
-                yield Placeholder("mods", id="view-mods")
-                yield Placeholder("console", id="view-console")
-                yield Placeholder("settings", id="view-settings")
+                yield Placeholder("Info", id="view-info")
+                yield Placeholder("Setup", id="view-setup")
+                yield Placeholder("Mods", id="view-mods")
+                yield Placeholder("Console", id="view-console")
+                yield Placeholder("Settings", id="view-settings")
 
 
 if __name__ == "__main__":
