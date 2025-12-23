@@ -1,10 +1,8 @@
 import requests
 from packaging import version
+from req_session import session as s
 
 SUPPORTED_LOADERS = {"vanilla", "fabric", "quilt"}
-
-s = requests.Session()
-s.headers.update({"User-Agent": "CrazyCat911's Minecraft Server TUI/0.0"})
 
 
 def get_supported_game_versions(loader: str) -> list[str]:
