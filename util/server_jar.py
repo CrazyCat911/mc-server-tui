@@ -1,7 +1,7 @@
 import requests
 from packaging import version
 
-SUPPORTED_LOADERS = {"vanilla", "forge", "neoforged", "fabric", "quilt"}
+SUPPORTED_LOADERS = {"vanilla", "fabric", "quilt"}
 
 s = requests.Session()
 s.headers.update({"User-Agent": "CrazyCat911's Minecraft Server TUI/0.0"})
