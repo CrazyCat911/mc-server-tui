@@ -44,27 +44,17 @@ def get_supported_game_versions(loader: str) -> list[str]:
     return supported_versions
 
 
-def get_supported_loader_versions(game_version: str, loader: str) -> list[str]:
-    if loader not in SUPPORTED_LOADERS:
-        raise ValueError(f"Unsupported mod loader: {loader}")
+def get_supported_fabric_versions(game_version: str) -> list[str]:
+    response = s.get(
+        f"https://meta.fabricmc.net/v2/versions/loader/{game_version}", timeout=5
+    )  # See https://github.com/FabricMC/fabric-meta?tab=readme-ov-file#v2versionsloadergame_version
+    data: list[dict] = response.json()
+    return [obj["loader"]["version"] for obj in data]
 
-    supported_versions: list[str] = []
 
-    if loader == "vanilla":
-        supported_versions = [game_version]
-
-    elif loader == "fabric":
-        response = s.get(
-            f"https://meta.fabricmc.net/v2/versions/loader/{game_version}", timeout=5
-        )  # See https://github.com/FabricMC/fabric-meta?tab=readme-ov-file#v2versionsloadergame_version
-        fabric_data: list[dict] = response.json()
-        supported_versions = [obj["loader"]["version"] for obj in fabric_data]
-
-    elif loader == "quilt":
-        response = s.get(
-            f"https://meta.quiltmc.org/v3/versions/loader/{game_version}", timeout=5
-        )  # See https://meta.quiltmc.org/#/v3/get_v3_versions_loader__game_version_
-        quilt_data = response.json()
-        supported_versions = [obj["loader"]["version"] for obj in quilt_data]
-
-    return supported_versions
+def get_supported_quilt_versions(game_version: str) -> list[str]:
+    response = s.get(
+        f"https://meta.quiltmc.org/v3/versions/loader/{game_version}", timeout=5
+    )  # See https://meta.quiltmc.org/#/v3/get_v3_versions_loader__game_version_
+    data = response.json()
+    return [obj["loader"]["version"] for obj in data]
