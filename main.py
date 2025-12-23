@@ -44,6 +44,13 @@ class MCServerTui(App):
     CSS_PATH = "main.tcss"
     TITLE = "Minecraft Server Manager"
     SUB_TITLE = "!!! WORK IN PROGRESS !!!"
+    BINDINGS = [
+        ("1", "switch_menu('view-info')", "Info"),
+        ("2", "switch_menu('view-setup')", "Setup"),
+        ("3", "switch_menu('view-mods')", "Mods"),
+        ("4", "switch_menu('view-console')", "Console"),
+        ("5", "switch_menu('view-settings')", "Settings"),
+    ]
 
     current_menu = reactive("view-info")
 
@@ -55,6 +62,11 @@ class MCServerTui(App):
 
     def watch_current_menu(self, current_menu: str) -> None:
         self.query_one(ContentSwitcher).current = current_menu
+        sidebar = self.query_one(Sidebar)
+        sidebar.current_menu = current_menu
+
+    def action_switch_menu(self, menu: str) -> None:
+        self.current_menu = menu
 
     def compose(self) -> ComposeResult:
         yield Header(show_clock=True)
