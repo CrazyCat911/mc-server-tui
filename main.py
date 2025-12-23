@@ -5,6 +5,10 @@ from textual.reactive import reactive
 from textual.message import Message
 
 
+class NoMaximizeButton(Button):
+    ALLOW_MAXIMIZE = False
+
+
 class Sidebar(Vertical):
     class MenuChanged(Message):
         def __init__(self, new_menu: str) -> None:
@@ -14,11 +18,11 @@ class Sidebar(Vertical):
     current_menu = reactive("view-info")
 
     def compose(self) -> ComposeResult:
-        yield Button("Info", id="btn-info")
-        yield Button("Setup", id="btn-setup")
-        yield Button("Mods", id="btn-mods")
-        yield Button("Console", id="btn-console")
-        yield Button("Settings", id="btn-settings")
+        yield NoMaximizeButton("Info", id="btn-info")
+        yield NoMaximizeButton("Setup", id="btn-setup")
+        yield NoMaximizeButton("Mods", id="btn-mods")
+        yield NoMaximizeButton("Console", id="btn-console")
+        yield NoMaximizeButton("Settings", id="btn-settings")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         event.stop()
