@@ -30,7 +30,12 @@ class Sidebar(Vertical):
         self.post_message(self.MenuChanged(self.current_menu))
 
     def watch_current_menu(self, current_menu: str) -> None:
-        pass  # TODO: Replace with button style switching code
+        button_id = current_menu.replace("view-", "btn-")
+        for button in self.query(Button):
+            if button.id == button_id:
+                button.variant = "primary"
+            else:
+                button.variant = "default"
 
 
 class MCServerTui(App):
