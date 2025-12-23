@@ -58,3 +58,27 @@ def get_supported_quilt_versions(game_version: str) -> list[str]:
     )  # See https://meta.quiltmc.org/#/v3/get_v3_versions_loader__game_version_
     data = response.json()
     return [obj["loader"]["version"] for obj in data]
+
+
+def get_vanilla_server_download_url(version: str, filepath: str) -> str:
+    response = s.get(
+        "https://launchermeta.mojang.com/mc/game/version_manifest.json", timeout=5
+    )
+    data = response.json()
+
+    version_url: str | None = None
+
+    for version_meta in data["versions"]:
+        if version_meta["id"] == version:
+            version_url = version_meta["url"]
+            break
+
+    if not version_url:
+        raise Exception(f"Version {version} not found")
+
+    response = s.get(version_url, timeout=5)
+    data = response.json()
+
+    download_url = data["downloads"]["server"]["url"]
+
+    return download_url
