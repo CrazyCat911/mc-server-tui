@@ -7,7 +7,7 @@ s = requests.Session()
 s.headers.update({"User-Agent": "CrazyCat911's Minecraft Server TUI/0.0"})
 
 
-def get_supported_game_versions_for_loader(loader: str) -> list[str]:
+def get_supported_game_versions(loader: str) -> list[str]:
     if loader not in SUPPORTED_LOADERS:
         raise ValueError(f"Unsupported mod loader: {loader}")
 
