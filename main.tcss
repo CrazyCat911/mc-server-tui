@@ -2,10 +2,11 @@ Sidebar {
     width: 1fr;
     height: 100h;
     padding: 1;
-}
-
-Sidebar > Button {
-    width: 100w
+    
+    &> Button {
+        width: 100w;
+        margin: 1;
+    }
 }
 
 
