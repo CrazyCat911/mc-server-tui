@@ -3,6 +3,9 @@ from packaging import version
 
 SUPPORTED_LOADERS = {"vanilla", "forge", "neoforged", "fabric", "quilt"}
 
+s = requests.Session()
+s.headers.update({"User-Agent": "CrazyCat911's Minecraft Server TUI/0.0"})
+
 
 def get_supported_game_versions_for_loader(loader: str) -> list[str]:
     if loader not in SUPPORTED_LOADERS:
@@ -11,7 +14,7 @@ def get_supported_game_versions_for_loader(loader: str) -> list[str]:
     supported_versions = []
 
     if loader == "vanilla":
-        response = requests.get(
+        response = s.get(
             "https://launchermeta.mojang.com/mc/game/version_manifest.json", timeout=5
         )
         vanilla_data: dict = response.json()
@@ -25,7 +28,7 @@ def get_supported_game_versions_for_loader(loader: str) -> list[str]:
                     supported_versions.append(vanilla_version["id"])
 
     elif loader == "fabric":
-        response = requests.get(
+        response = s.get(
             "https://meta.fabricmc.net/v2/versions/game", timeout=5
         )  # see https://github.com/FabricMC/fabric-meta?tab=readme-ov-file#v2versionsgame
         fabric_data: list[dict] = response.json()
@@ -34,7 +37,7 @@ def get_supported_game_versions_for_loader(loader: str) -> list[str]:
         ]
 
     elif loader == "quilt":
-        response = requests.get(
+        response = s.get(
             "https://meta.quiltmc.org/v3/versions/game", timeout=5
         )  # see https://meta.quiltmc.org/#/v3/get_v3_versions_game
         quilt_data: list[dict] = response.json()
