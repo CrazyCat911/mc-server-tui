@@ -2,7 +2,6 @@ from rich.text import Text
 
 SETUP_SHORT = "Setup"
 SETUP_LONG = "Server Setup"
-
 SERVER_EXISTS = """# Server already exists"""
 VANILLA_DESCRIPTION = Text.from_markup(
     "[green4 b]Vanilla[/] [bright_black i]The official Mojang-approved server[/]"
@@ -19,3 +18,5 @@ FORGE_DESCRIPTION = Text.from_markup(
 NEOFORGED_DESCRIPTION = Text.from_markup(
     "[dark_orange3 b]NeoForged[/] [bright_black i]The new [grey78]Forge[/]. Much better"
 )
+VANILLA_GAME_VERSION_ERROR = "Error while getting game versions"
+VANILLA_GAME_VERSION_ERROR_TITLE = "Vanilla Game Data Fetch Error"

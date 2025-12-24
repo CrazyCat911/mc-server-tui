@@ -1,0 +1,9 @@
+LoadingOverlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+Vertical {
+    height: 50%;
+    width: 50%;
+    offset: 50% 50%;
+}
