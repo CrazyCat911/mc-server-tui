@@ -1,4 +1,4 @@
-from req_session import client as c
+from util.client import client as c
 from textual.widgets import ProgressBar
 
 
