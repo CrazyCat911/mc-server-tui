@@ -5,7 +5,7 @@ SETUP_LONG = "Server Setup"
 
 SERVER_EXISTS = """# Server already exists"""
 VANILLA_DESCRIPTION = Text.from_markup(
-    "[white b]Vanilla[/] [bright_black i]The official Mojang-approved server[/]"
+    "[green4 b]Vanilla[/] [bright_black i]The official Mojang-approved server[/]"
 )
 FABRIC_DESCRIPTION = Text.from_markup(
     "[light_yellow3 b]Fabric[/] [bright_black i]A fast modding framework[/]"
