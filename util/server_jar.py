@@ -116,5 +116,5 @@ def get_quilt_download_url(version: str) -> str:
     raise Exception("Version not found")
 
 
-def download_quilt_installer(version: str, path: str):
+def download_quilt_installer(version: str, path: str) -> None:
     download_file(get_quilt_download_url(version), path)

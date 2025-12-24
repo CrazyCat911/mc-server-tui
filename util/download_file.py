@@ -1,7 +1,7 @@
 from req_session import session as s
 
 
-def download_file(url: str, path: str):
+def download_file(url: str, path: str) -> None:
     response = s.get(url, stream=True)
 
     with open(path, "wbx") as file:
