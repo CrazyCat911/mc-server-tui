@@ -16,7 +16,7 @@ LoadingOverlay {
             content-align: center middle;
         }
         ProgressBar {
-            /* TODO: Stuff */
+            /* TODO: Center align */
         }
         #loading-overlay-description {
             text-style: bold;
