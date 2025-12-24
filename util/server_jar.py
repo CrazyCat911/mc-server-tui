@@ -2,6 +2,7 @@ from packaging import version
 from req_session import session as s
 from download_file import download_file
 import os, shutil
+from textual.widgets import ProgressBar
 
 
 """ VANILLA """
@@ -47,8 +48,8 @@ def get_vanilla_server_download_url(version: str) -> str:
     return download_url
 
 
-def install_vanilla_server(version: str, path: str):
-    download_file(get_vanilla_server_download_url(version), path)
+def install_vanilla_server(version: str, path: str, progress_bar: ProgressBar):
+    download_file(get_vanilla_server_download_url(version), path, progress_bar)
 
 
 """ FABRIC """
@@ -85,11 +86,16 @@ def get_fabric_server_download_url(
 
 
 def install_fabric_server(
-    game_version: str, loader_version: str, installer_version: str, path: str
+    game_version: str,
+    loader_version: str,
+    installer_version: str,
+    path: str,
+    progress_bar: ProgressBar,
 ):
     download_file(
         get_fabric_server_download_url(game_version, loader_version, installer_version),
         path,
+        progress_bar,
     )
 
 
@@ -122,8 +128,10 @@ def get_quilt_download_url(version: str) -> str:
     raise Exception("Version not found")
 
 
-def download_quilt_installer(version: str, path: str) -> None:
-    download_file(get_quilt_download_url(version), path)
+def download_quilt_installer(
+    version: str, path: str, progress_bar: ProgressBar
+) -> None:
+    download_file(get_quilt_download_url(version), path, progress_bar)
 
 
 def install_quilt_server(
