@@ -58,7 +58,7 @@ class MCServerTui(App):
     SUB_TITLE = "!!! WORK IN PROGRESS !!!"
     BINDINGS = [
         ("1", "switch_menu('view-info')", "Info"),
-        ("2", "switch_menu('view-setup')", "Setup"),
+        ("2", "switch_menu('view-setup')", messages.SETUP_SHORT),
         ("3", "switch_menu('view-mods')", "Mods"),
         ("4", "switch_menu('view-console')", "Console"),
         ("5", "switch_menu('view-settings')", "Settings"),
