@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 textual = "*"
+jproperties = "*"
+requests = "*"
 
 [dev-packages]
 textual-dev = "*"
