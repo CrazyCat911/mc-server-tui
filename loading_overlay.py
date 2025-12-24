@@ -1,6 +1,6 @@
-from textual.app import ComposeResult
+from textual.app import ComposeResult, App
 from textual.screen import Screen
-from textual.widgets import ProgressBar, Static
+from textual.widgets import ProgressBar, Static, Footer, Header
 from textual.reactive import reactive
 from textual.containers import Vertical
 
@@ -18,10 +18,13 @@ class LoadingOverlay(Screen):
         id: str | None = None,
         classes: str | None = None,
     ) -> None:
-        self.progress_bar = progress_bar
         super().__init__(name, id, classes)
+        self.text = text
+        self.progress_bar = progress_bar
 
     def compose(self) -> ComposeResult:
+        yield Header()
         with Vertical():
-            yield Static(self.text)
+            yield Static(self.text, id="loading-overlay-description")
             yield self.progress_bar
+        yield Footer()

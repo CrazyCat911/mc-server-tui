@@ -1,9 +1,28 @@
 LoadingOverlay {
     background: rgba(0, 0, 0, 0.3);
-}
 
-Vertical {
-    height: 50%;
-    width: 50%;
-    offset: 50% 50%;
+    Vertical {
+        height: 40%;
+        width: 50%;
+        offset: 50% 50%;
+        background: $panel;
+        border: panel $background;
+        text-align: center;
+        align: center middle;
+        content-align: center middle;
+        * {
+            text-align: center;
+            align: center middle;
+            content-align: center middle;
+        }
+        ProgressBar {
+            /* TODO: Stuff */
+        }
+        #loading-overlay-description {
+            text-style: bold;
+            box-sizing: content-box;
+            padding: 1;
+            color: $primary;
+        }
+    }
 }
