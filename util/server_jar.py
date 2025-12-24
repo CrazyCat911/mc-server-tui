@@ -2,6 +2,15 @@ import requests
 from packaging import version
 from req_session import session as s
 
+
+def download_file(url: str, path: str):
+    response = s.get(url, stream=True)
+
+    with open(path, "wbx") as file:
+        for chunk in response.iter_content(chunk_size=10 * 1024):
+            file.write(chunk)
+
+
 """ VANILLA """
 
 VANILLA_URL = "https://launchermeta.mojang.com"
@@ -100,12 +109,6 @@ def get_supported_quilt_versions(game_version: str) -> list[str]:
 
 
 def get_quilt_installer_versions() -> list[str]:
-    response = s.get(f"{QUILT_URL}/v2/versions/installer", timeout=5)
+    response = s.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
     data: list[dict] = response.json()
     return [obj["version"] for obj in data]
-
-
-def get_quilt_server_download_url(
-    game_version: str, loader_version: str, installer_version: str
-) -> str:
-    return f"{QUILT_URL}/v2/versions/loader/{game_version}/{loader_version}/{installer_version}/server/jar"
