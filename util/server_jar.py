@@ -1,4 +1,3 @@
-import requests
 from packaging import version
 from req_session import session as s
 
