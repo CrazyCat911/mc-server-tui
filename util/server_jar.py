@@ -80,6 +80,15 @@ def get_fabric_server_download_url(
     return f"{FABRIC_URL}/v2/versions/loader/{game_version}/{loader_version}/{installer_version}/server/jar"
 
 
+def install_fabric_server(
+    game_version: str, loader_version: str, installer_version: str, path: str
+):
+    download_file(
+        get_fabric_server_download_url(game_version, loader_version, installer_version),
+        path,
+    )
+
+
 """ QUILT """
 
 QUILT_URL = "https://meta.quiltmc.org"
