@@ -7,6 +7,7 @@ from util.server_exists import server_exists
 
 class SetupScreen(VerticalScroll):
     CSS_PATH = "setup_screen.tcss"
+    BORDER_TITLE = messages.SETUP_LONG
 
     def compose(self) -> ComposeResult:
         if False:  # server_exists(".")

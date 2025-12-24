@@ -10,6 +10,7 @@ from textual.containers import Horizontal, VerticalScroll
 from textual.reactive import reactive
 from textual.message import Message
 from screens.setup_screen import SetupScreen
+import messages
 
 
 class NoMaximizeButton(Button):
@@ -26,7 +27,7 @@ class Sidebar(VerticalScroll):
 
     def compose(self) -> ComposeResult:
         yield NoMaximizeButton("Info", id="btn-info")
-        yield NoMaximizeButton("Setup", id="btn-setup")
+        yield NoMaximizeButton(messages.SETUP_SHORT, id="btn-setup")
         yield NoMaximizeButton("Mods", id="btn-mods")
         yield NoMaximizeButton("Console", id="btn-console")
         yield NoMaximizeButton("Settings", id="btn-settings")

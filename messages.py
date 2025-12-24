@@ -1,5 +1,8 @@
 from rich.text import Text
 
+SETUP_SHORT = "Setup"
+SETUP_LONG = "Server Setup"
+
 SERVER_EXISTS = """# Server already exists"""
 VANILLA_DESCRIPTION = Text.from_markup(
     "[white b]Vanilla[/] [bright_black i]The official Mojang-approved server[/]"
