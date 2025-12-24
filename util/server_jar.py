@@ -1,6 +1,7 @@
 from packaging import version
 from req_session import session as s
 from download_file import download_file
+import os, shutil
 
 
 """ VANILLA """
@@ -92,14 +93,6 @@ def get_supported_quilt_game_versions() -> list[str]:
     return [obj["version"] for obj in data]
 
 
-def get_supported_quilt_versions(game_version: str) -> list[str]:
-    response = s.get(
-        f"{QUILT_URL}/v3/versions/loader/{game_version}", timeout=5
-    )  # See https://meta.quiltmc.org/#/v3/get_v3_versions_loader__game_version_
-    data = response.json()
-    return [obj["loader"]["version"] for obj in data]
-
-
 def get_quilt_installer_versions() -> list[str]:
     response = s.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
     data: list[dict] = response.json()
@@ -118,3 +111,15 @@ def get_quilt_download_url(version: str) -> str:
 
 def download_quilt_installer(version: str, path: str) -> None:
     download_file(get_quilt_download_url(version), path)
+
+
+def install_quilt_server(
+    installer_path: str, game_version: str, server_path: str
+) -> None:
+    os.system(
+        f"""java -jar {installer_path} \\
+        install server {game_version} \\
+        --download-server"""
+    )
+
+    shutil.move("./server/", server_path)
