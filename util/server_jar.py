@@ -1,6 +1,6 @@
 from packaging import version
 from util.client import client as c
-from download_file import download_file
+from util.download_file import download_file
 import os, shutil
 from textual.widgets import ProgressBar
 
