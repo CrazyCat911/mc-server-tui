@@ -9,6 +9,7 @@ jproperties = "*"
 httpx = "*"
 packaging = "*"
 pathlib = "*"
+aiofiles = "*"
 
 [dev-packages]
 textual-dev = "*"
