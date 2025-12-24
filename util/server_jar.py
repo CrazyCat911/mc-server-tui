@@ -104,3 +104,17 @@ def get_quilt_installer_versions() -> list[str]:
     response = s.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
     data: list[dict] = response.json()
     return [obj["version"] for obj in data]
+
+
+def get_quilt_download_url(version: str) -> str:
+    response = s.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
+    data: list[dict] = response.json()
+    for obj in data:
+        if obj["version"] == version:
+            return obj["url"]
+
+    raise Exception("Version not found")
+
+
+def download_quilt_installer(version: str, path: str):
+    download_file(get_quilt_download_url(version), path)
