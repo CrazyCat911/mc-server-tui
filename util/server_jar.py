@@ -97,3 +97,15 @@ def get_supported_quilt_versions(game_version: str) -> list[str]:
     )  # See https://meta.quiltmc.org/#/v3/get_v3_versions_loader__game_version_
     data = response.json()
     return [obj["loader"]["version"] for obj in data]
+
+
+def get_quilt_installer_versions() -> list[str]:
+    response = s.get(f"{QUILT_URL}/v2/versions/installer", timeout=5)
+    data: list[dict] = response.json()
+    return [obj["version"] for obj in data]
+
+
+def get_quilt_server_download_url(
+    game_version: str, loader_version: str, installer_version: str
+) -> str:
+    return f"{QUILT_URL}/v2/versions/loader/{game_version}/{loader_version}/{installer_version}/server/jar"
