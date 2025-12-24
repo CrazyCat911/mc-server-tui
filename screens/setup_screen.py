@@ -2,6 +2,7 @@ from textual.containers import VerticalScroll, Vertical, Horizontal
 from textual.app import ComposeResult
 from textual.events import Mount, Show
 from textual import work
+from textual.widget import Widget
 from textual.widgets import (
     Markdown,
     RadioSet,
@@ -116,6 +117,25 @@ class NeoForgedSetup(ModLoaderSetup):
 
 class SetupForm(Vertical):
     mod_loader: reactive[None | str] = reactive(None)
+    can_focus = True
+
+    def __init__(
+        self,
+        *children: Widget,
+        name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+        disabled: bool = False,
+        markup: bool = True,
+    ) -> None:
+        super().__init__(
+            *children,
+            name=name,
+            id=id,
+            classes=classes,
+            disabled=disabled,
+            markup=markup,
+        )
 
     def on_radio_set_changed(self, event: RadioSet.Changed) -> None:
         if event.radio_set == self.query_one("#mod-loader-form", RadioSet):
@@ -143,6 +163,9 @@ class SetupForm(Vertical):
     async def on_mod_loader_setup_canceled(self, event: ModLoaderSetup.Canceled):
         await self.recompose()
 
+    def on_focus(self):
+        self.query_one("#mod-loader-form", RadioSet).focus()
+
     def compose(self) -> ComposeResult:
         with RadioSet(id="mod-loader-form"):
             yield RadioButton(messages.VANILLA_DESCRIPTION, name="vanilla")
@@ -157,7 +180,8 @@ class SetupScreen(VerticalScroll):
     BORDER_TITLE = messages.SETUP_LONG
 
     def on_show(self, event: Show) -> None:
-        self.query_one("#mod-loader-form", RadioSet).focus()
+        for result in self.query(SetupForm):
+            result.focus()
 
     def compose(self) -> ComposeResult:
         if server_exists("."):
