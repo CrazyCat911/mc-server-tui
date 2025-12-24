@@ -72,6 +72,12 @@ def get_fabric_installer_versions() -> list[str]:
     return [obj["version"] for obj in data]
 
 
+def get_fabric_server_download_url(
+    game_version: str, loader_version: str, installer_version: str
+) -> str:
+    return f"{FABRIC_URL}/v2/versions/loader/{game_version}/{loader_version}/{installer_version}/server/jar"
+
+
 """ QUILT """
 
 QUILT_URL = "https://meta.quiltmc.org"
