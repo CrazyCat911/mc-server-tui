@@ -15,7 +15,7 @@ Sidebar {
     height: 100h;
 
     &> * {
-        border: round lightblue;
+        border: round $secondary;
     }
 
     VerticalScroll {
