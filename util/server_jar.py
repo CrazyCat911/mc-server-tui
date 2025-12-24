@@ -25,7 +25,7 @@ def get_supported_vanilla_game_versions() -> list[str]:
     return supported_versions
 
 
-def get_vanilla_server_download_url(version: str, filepath: str) -> str:
+def get_vanilla_server_download_url(version: str) -> str:
     response = s.get(f"{VANILLA_URL}/mc/game/version_manifest.json", timeout=5)
     data = response.json()
 
@@ -45,6 +45,10 @@ def get_vanilla_server_download_url(version: str, filepath: str) -> str:
     download_url = data["downloads"]["server"]["url"]
 
     return download_url
+
+
+def install_vanilla_server(version: str, path: str):
+    download_file(get_vanilla_server_download_url(version), path)
 
 
 """ FABRIC """
