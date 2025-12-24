@@ -1,15 +1,22 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Static, Header, Footer, ContentSwitcher, Button, Placeholder
-from textual.containers import Horizontal, Vertical
+from textual.widgets import (
+    Header,
+    Footer,
+    ContentSwitcher,
+    Button,
+    Placeholder,
+)
+from textual.containers import Horizontal, VerticalScroll
 from textual.reactive import reactive
 from textual.message import Message
+from screens.setup_screen import SetupScreen
 
 
 class NoMaximizeButton(Button):
     ALLOW_MAXIMIZE = False
 
 
-class Sidebar(Vertical):
+class Sidebar(VerticalScroll):
     class MenuChanged(Message):
         def __init__(self, new_menu: str) -> None:
             super().__init__()
@@ -79,7 +86,7 @@ class MCServerTui(App):
             yield Sidebar()
             with ContentSwitcher(initial="view-info", id="main"):
                 yield Placeholder("Info", id="view-info")
-                yield Placeholder("Setup", id="view-setup")
+                yield SetupScreen(id="view-setup")
                 yield Placeholder("Mods", id="view-mods")
                 yield Placeholder("Console", id="view-console")
                 yield Placeholder("Settings", id="view-settings")

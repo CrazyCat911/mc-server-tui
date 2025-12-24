@@ -14,7 +14,11 @@ Sidebar {
     width: 7fr;
     height: 100h;
 
-    * {
-        border: round;
+    &> * {
+        border: round lightblue;
+    }
+
+    VerticalScroll {
+        align: center middle;
     }
 }
