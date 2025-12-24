@@ -1,4 +1,3 @@
-import requests
+import httpx
 
-session = requests.Session()
-session.headers.update({"User-Agent": "CrazyCat911's Minecraft Server TUI/0.0"})
+client = httpx.Client(headers={"User-Agent": "CrazyCat911's Minecraft Server TUI/0.0"})

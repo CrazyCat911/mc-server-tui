@@ -1,5 +1,5 @@
 from packaging import version
-from req_session import session as s
+from req_session import client as c
 from download_file import download_file
 import os, shutil
 from textual.widgets import ProgressBar
@@ -12,7 +12,7 @@ VANILLA_URL = "https://launchermeta.mojang.com"
 
 def get_supported_vanilla_game_versions() -> list[str]:
     supported_versions: list[str] = []
-    response = s.get(f"{VANILLA_URL}/mc/game/version_manifest.json", timeout=5)
+    response = c.get(f"{VANILLA_URL}/mc/game/version_manifest.json", timeout=5)
     data: dict = response.json()
     for obj in data["versions"]:
         if obj["type"] == "snapshot":
@@ -27,7 +27,7 @@ def get_supported_vanilla_game_versions() -> list[str]:
 
 
 def get_vanilla_server_download_url(version: str) -> str:
-    response = s.get(f"{VANILLA_URL}/mc/game/version_manifest.json", timeout=5)
+    response = c.get(f"{VANILLA_URL}/mc/game/version_manifest.json", timeout=5)
     data = response.json()
 
     version_url: str | None = None
@@ -40,7 +40,7 @@ def get_vanilla_server_download_url(version: str) -> str:
     if not version_url:
         raise Exception(f"Version {version} not found")
 
-    response = s.get(version_url, timeout=5)
+    response = c.get(version_url, timeout=5)
     data = response.json()
 
     download_url = data["downloads"]["server"]["url"]
@@ -58,7 +58,7 @@ FABRIC_URL = "https://meta.fabricmc.net"
 
 
 def get_supported_fabric_game_versions() -> list[str]:
-    response = s.get(
+    response = c.get(
         f"{FABRIC_URL}/v2/versions/game", timeout=5
     )  # see https://github.com/FabricMC/fabric-meta?tab=readme-ov-file#v2versionsgame
     data: list[dict] = response.json()
@@ -66,7 +66,7 @@ def get_supported_fabric_game_versions() -> list[str]:
 
 
 def get_supported_fabric_versions(game_version: str) -> list[str]:
-    response = s.get(
+    response = c.get(
         f"{FABRIC_URL}/v2/versions/loader/{game_version}", timeout=5
     )  # See https://github.com/FabricMC/fabric-meta?tab=readme-ov-file#v2versionsloadergame_version
     data: list[dict] = response.json()
@@ -74,7 +74,7 @@ def get_supported_fabric_versions(game_version: str) -> list[str]:
 
 
 def get_fabric_installer_versions() -> list[str]:
-    response = s.get(f"{FABRIC_URL}/v2/versions/installer", timeout=5)
+    response = c.get(f"{FABRIC_URL}/v2/versions/installer", timeout=5)
     data: list[dict] = response.json()
     return [obj["version"] for obj in data]
 
@@ -105,7 +105,7 @@ QUILT_URL = "https://meta.quiltmc.org"
 
 
 def get_supported_quilt_game_versions() -> list[str]:
-    response = s.get(
+    response = c.get(
         f"{QUILT_URL}/v3/versions/game", timeout=5
     )  # see https://meta.quiltmc.org/#/v3/get_v3_versions_game
     data: list[dict] = response.json()
@@ -113,13 +113,13 @@ def get_supported_quilt_game_versions() -> list[str]:
 
 
 def get_quilt_installer_versions() -> list[str]:
-    response = s.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
+    response = c.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
     data: list[dict] = response.json()
     return [obj["version"] for obj in data]
 
 
 def get_quilt_download_url(version: str) -> str:
-    response = s.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
+    response = c.get(f"{QUILT_URL}/v3/versions/installer", timeout=5)
     data: list[dict] = response.json()
     for obj in data:
         if obj["version"] == version:

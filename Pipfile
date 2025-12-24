@@ -6,7 +6,9 @@ name = "pypi"
 [packages]
 textual = "*"
 jproperties = "*"
-requests = "*"
+httpx = "*"
+packaging = "*"
+pathlib = "*"
 
 [dev-packages]
 textual-dev = "*"
